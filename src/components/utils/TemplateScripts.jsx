@@ -36,11 +36,23 @@ export default function TemplateScripts() {
       // ===== Mobile Nav Toggle =====
       const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
       const mobileNavToggle = () => {
-        body.classList.toggle("mobile-nav-active");
+        const open = body.classList.toggle("mobile-nav-active");
         mobileNavToggleBtn?.classList.toggle("bi-list");
         mobileNavToggleBtn?.classList.toggle("bi-x");
+        mobileNavToggleBtn?.setAttribute(
+          "aria-label",
+          open ? "Close menu" : "Open menu"
+        );
       };
       mobileNavToggleBtn?.addEventListener("click", mobileNavToggle);
+      mobileNavToggleBtn?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          mobileNavToggle();
+        }
+        if (e.key === "Escape" && body.classList.contains("mobile-nav-active"))
+          mobileNavToggle();
+      });
 
       // Close mobile nav on link click
       document.querySelectorAll("#navmenu a").forEach((link) =>
@@ -64,6 +76,43 @@ export default function TemplateScripts() {
       });
       window.addEventListener("scroll", toggleScrollTop);
       toggleScrollTop();
+
+      // ===== In-page anchor links =====
+      // Always scroll to the target, even when the URL hash is unchanged.
+      document.querySelectorAll("a[href^='#']").forEach((link) =>
+        link.addEventListener("click", (e) => {
+          const hash = link.getAttribute("href");
+          if (hash.length < 2) return;
+          const target = document.querySelector(hash);
+          if (!target) return;
+          e.preventDefault();
+          if (hash === "#hero") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            target.scrollIntoView({ behavior: "smooth" });
+          }
+          history.replaceState(null, "", hash);
+        })
+      );
+
+      // ===== Navmenu Scrollspy =====
+      const navLinks = document.querySelectorAll(
+        "#navmenu > ul > li > a[href^='#']:not(.btn-mb)"
+      );
+      const navmenuScrollspy = () => {
+        const position = window.scrollY + 200;
+        navLinks.forEach((link) => {
+          const section = document.querySelector(link.hash);
+          if (!section) return;
+          const inView =
+            position >= section.offsetTop &&
+            position <= section.offsetTop + section.offsetHeight;
+          link.classList.toggle("active", inView);
+        });
+      };
+      window.addEventListener("load", navmenuScrollspy);
+      document.addEventListener("scroll", navmenuScrollspy);
+      navmenuScrollspy();
 
       // ===== Preloader =====
       const preloader = document.querySelector("#preloader");

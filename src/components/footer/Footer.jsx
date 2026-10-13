@@ -1,136 +1,112 @@
 "use client";
 
+import { DIRECTIONS_URL } from "@/components/location/Location";
+
+const QUICK_LINKS = [
+  { label: "Home", href: "#hero" },
+  { label: "About", href: "#about" },
+  { label: "Menu", href: "#menu" },
+  { label: "Book a table", href: "#book-a-table" },
+  { label: "Events", href: "#events" },
+  { label: "Contact", href: "#contact" },
+];
+
 export default function Footer() {
   return (
     <footer id="footer" className="footer dark-background">
       <div className="container">
-        <div className="row gy-5">
-          {/* Footer Brand & Description */}
+        <div className="row gy-5 footer-main">
           <div className="col-lg-4">
-            <div className="footer-content">
-              <a
-                href="index.html"
-                className="logo d-flex justify-content-start justify-content-md-start justify-content-center mb-2"
-              >
-                <img
-                  src="assets/img/mubarak_logo.png"
-                  alt="Mubarak Hotel Logo"
-                  className="img-fluid"
-                />
-              </a>
-              <a href="/" className="logo d-flex align-items-center mb-4 mt-3">
-                <span className="sitename">Mubarak Family Restaurant</span>
-              </a>
-              <p className="mb-4">
-                Welcome to Mubarak Family Restaurant in Marthandam, Kanyakumari.
-                Enjoy our multi-cuisine restaurant, halal dishes, and book rooms
-                or events with ease.
-              </p>
+            <a href="#hero" className="footer-brand">
+              <img src="assets/img/mubarak_logo.png" alt="Mubarak Hotel logo" />
+              <span>Mubarak Family Restaurant</span>
+            </a>
+            <p className="footer-about">
+              Multi-cuisine family dining in Marthandam, Kanyakumari: South
+              Indian, Kerala, Chinese and Arabian dishes, all halal. Rooms and
+              event spaces available.
+            </p>
+            <div className="footer-tags">
+              <span>
+                <i className="bi bi-patch-check"></i> 100% halal
+              </span>
+              <span>
+                <i className="bi bi-people"></i> Family dining
+              </span>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <FooterLinks
-            title="Quick Links"
-            links={[
-              { label: "Home", href: "/" },
-              { label: "Restaurant Menu", href: "#menu" },
-              { label: "Book a Table", href: "#book-a-table" },
-              { label: "Event Booking", href: "#events" },
-              { label: "Contact Us", href: "#contact" },
-            ]}
-          />
+          <div className="col-lg-2 col-md-6">
+            <h4>Explore</h4>
+            <ul className="footer-links">
+              {QUICK_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href}>{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* Contact Info */}
-          <div className="col-lg-4">
-            <div className="footer-contact">
-              <h4>Get in Touch</h4>
+          <div className="col-lg-3 col-md-6">
+            <h4>Contact</h4>
+            <ul className="footer-contact">
+              <li>
+                <i className="bi bi-telephone"></i>
+                <a href="tel:+914651270999">+91 4651 270 999</a>
+              </li>
+              <li>
+                <i className="bi bi-envelope"></i>
+                <a href="mailto:mubarakhotels@yahoo.co.in">
+                  mubarakhotels@yahoo.co.in
+                </a>
+              </li>
+              <li>
+                <i className="bi bi-geo-alt"></i>
+                <span>
+                  2-76-A2, Safiya Complex, Main Road, Marthandam, Tamil Nadu
+                  629165
+                </span>
+              </li>
+            </ul>
+          </div>
 
-              <ContactItem
-                icon="bi-geo-alt"
-                content={
-                  <>
-                    2-76-A2, Safiya Complex,
-                    <br />
-                    Main Road, Marthandam, KK District,
-                    <br />
-                    Tamil Nadu 629165, India
-                  </>
-                }
-              />
-
-              <ContactItem icon="bi-telephone" content="+91 4651 270 999" />
-              <ContactItem
-                icon="bi-envelope"
-                content="mubarakhotels@yahoo.co.in"
-              />
+          <div className="col-lg-3">
+            <h4>Opening hours</h4>
+            <div className="footer-hours">
+              <span>Monday – Sunday</span>
+              <strong>8:00 AM – 11:00 PM</strong>
             </div>
+            <a
+              href={DIRECTIONS_URL}
+              className="footer-directions"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i className="bi bi-signpost-2"></i> Get directions
+              <i className="bi bi-arrow-up-right"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Footer Bottom */}
       <div className="footer-bottom">
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6">
-              <div className="copyright">
-                <p>
-                  © <span>{new Date().getFullYear()} Copyright</span>{" "}
-                  <strong className="px-1 sitename">
-                    Mubarak Family Restaurant
-                  </strong>{" "}
-                  <span>All Rights Reserved</span>
-                </p>
-              </div>
-            </div>
-            <div className="col-lg-6">
-              <div className="footer-bottom-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-              </div>
-              <div className="credits">
-                Designed by{" "}
-                <a href="https://dotseek.co.uk/" target="_blank">
-                  DotSeek
-                </a>
-              </div>
-            </div>
-          </div>
+          <p>
+            © {new Date().getFullYear()} Mubarak Family Restaurant. All rights
+            reserved.
+          </p>
+          <p className="credits">
+            Designed by{" "}
+            <a
+              href="https://dotseek.co.uk/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              DotSeek
+            </a>
+          </p>
         </div>
       </div>
     </footer>
-  );
-}
-
-// Footer Links Component
-function FooterLinks({ title, links }) {
-  return (
-    <div className="col-lg-2 col-6">
-      <div className="footer-links">
-        <h4>{title}</h4>
-        <ul>
-          {links.map((link, idx) => (
-            <li key={idx}>
-              <a href={link.href}>
-                <i className="bi bi-chevron-right"></i> {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-// Contact Item Component
-function ContactItem({ icon, content }) {
-  return (
-    <div className="contact-item">
-      <div className="contact-icon">
-        <i className={`bi ${icon}`}></i>
-      </div>
-      <div className="contact-info">{content}</div>
-    </div>
   );
 }

@@ -5,8 +5,8 @@ export default function About() {
     <section id="about" className="about section">
       {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
-        <span className="description-title">About</span>
-        <h2>About Mubarak Family Restaurant</h2>
+        <span className="description-title">Our story</span>
+        <h2>Welcome to Mubarak</h2>
         <p>
           Discover comfort, fine dining, and hospitality at the heart of
           Marthandam, Kanyakumari
@@ -17,7 +17,7 @@ export default function About() {
         <div className="row g-5 align-items-center">
           <div className="col-lg-6" data-aos="fade-up">
             <div className="about-content">
-              <h2>Experience Culinary Excellence & Comfort</h2>
+              <h2>Culinary excellence and comfort</h2>
               <p className="fst-italic">
                 Hotel Mubarak is renowned for its multi-cuisine restaurant
                 offering South Indian, Chinese, and special Arabic halal dishes,

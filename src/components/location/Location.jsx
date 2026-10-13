@@ -1,26 +1,26 @@
 "use client";
 
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+const MAP_EMBED =
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.514567760466!2d77.25782087548238!3d8.292500593900032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b03ec0a3d019eaf%3A0x3e1b8db15f3d30b8!2sMubarak%20Hotel!5e0!3m2!1sen!2sin!4v1692945600000!5m2!1sen!2sin";
+export const DIRECTIONS_URL =
+  "https://www.google.com/maps/search/?api=1&query=Mubarak+Hotel+Marthandam";
 
 export default function Location() {
-  useEffect(() => {
-    AOS.init({ duration: 600, easing: "ease-in-out", once: true });
-  }, []);
-
   return (
-    <section id="location" className="location section">
+    <section id="location" className="location section dark-background">
+      <div className="container section-title" data-aos="fade-up">
+        <span className="description-title">Visit us</span>
+        <h2>Find us in Marthandam</h2>
+        <p>On Main Road in Safiya Complex, open every day of the week.</p>
+      </div>
+
       <div className="container" data-aos="fade-up" data-aos-delay="100">
-        <div className="row g-4">
-          {/* Map */}
-          <div className="col-lg-6" data-aos="fade-right" data-aos-delay="200">
-            <div className="map-container">
+        <div className="row g-4 align-items-stretch">
+          <div className="col-lg-7">
+            <div className="location-map">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.514567760466!2d77.25782087548238!3d8.292500593900032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b03ec0a3d019eaf%3A0x3e1b8db15f3d30b8!2sMubarak%20Hotel!5e0!3m2!1sen!2sin!4v1692945600000!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
+                src={MAP_EMBED}
+                title="Map showing Mubarak Hotel, Marthandam"
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -28,62 +28,34 @@ export default function Location() {
             </div>
           </div>
 
-          {/* Info Cards */}
-          <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-            <div className="info-container">
-              <div className="section-header">
-                <h2>Find Us</h2>
-                <p>Visit Us Today</p>
-              </div>
+          <div className="col-lg-5">
+            <div className="location-card">
+              <ul className="location-list">
+                <LocationItem icon="bi-geo-alt" title="Address">
+                  2-76-A2, Safiya Complex, Main Road,
+                  <br />
+                  Marthandam, KK District, Tamil Nadu 629165
+                </LocationItem>
+                <LocationItem icon="bi-telephone" title="Reservations">
+                  <a href="tel:+914651270999">+91 4651 270 999</a>
+                  <small>Book 48 hours ahead for parties and weekends.</small>
+                </LocationItem>
+                <LocationItem icon="bi-clock" title="Opening hours">
+                  Monday – Sunday, 8:00 AM – 11:00 PM
+                </LocationItem>
+              </ul>
 
-              <InfoCard
-                icon="bi-geo-alt"
-                title="Our Location"
-                content={
-                  <p>
-                    2-76-A2, Safiya Complex, Main Road, Marthandam, KK District,
-                    Tamilnadu - 629165, India
-                  </p>
-                }
-                delay={300}
-              />
-              <InfoCard
-                icon="bi-telephone"
-                title="Reservations"
-                content={
-                  <>
-                    <p>+91 4651 270 999</p>
-                    <p className="small-text">
-                      We recommend making reservations at least 48 hours in
-                      advance
-                    </p>
-                  </>
-                }
-                delay={400}
-              />
-              <InfoCard
-                icon="bi-clock"
-                title="Hours"
-                content={
-                  <div className="hours-grid">
-                    <div className="day">Monday - Sunday</div>
-                    <div className="time">08:00 AM - 11:00 PM</div>
-                  </div>
-                }
-                delay={500}
-              />
-
-              {/* CTA Buttons */}
-              <div
-                className="cta-wrapper"
-                data-aos="fade-up"
-                data-aos-delay="600"
-              >
-                <a href="#book-a-table" className="btn-book">
-                  Make a Reservation
+              <div className="btn-group-mb">
+                <a
+                  href={DIRECTIONS_URL}
+                  className="btn-mb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="bi bi-signpost-2"></i> Get directions
                 </a>
-                <a href="#contact" className="btn-contact">
-                  Contact Us
+                <a href="tel:+914651270999" className="btn-mb btn-mb-outline">
+                  <i className="bi bi-telephone"></i> Call us
                 </a>
               </div>
             </div>
@@ -94,17 +66,16 @@ export default function Location() {
   );
 }
 
-// InfoCard Component
-function InfoCard({ icon, title, content, delay }) {
+function LocationItem({ icon, title, children }) {
   return (
-    <div className="info-card" data-aos="fade-up" data-aos-delay={delay}>
-      <div className="info-icon">
+    <li>
+      <span className="location-icon" aria-hidden="true">
         <i className={`bi ${icon}`}></i>
-      </div>
-      <div className="info-content">
+      </span>
+      <div>
         <h3>{title}</h3>
-        {content}
+        <p>{children}</p>
       </div>
-    </div>
+    </li>
   );
 }

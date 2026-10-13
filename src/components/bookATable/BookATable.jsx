@@ -1,19 +1,33 @@
 "use client";
 
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { emailFormHandler } from "@/components/utils/emailForm";
+
+const onReserve = emailFormHandler("Table reservation request", {
+  name: "Name",
+  phone: "Phone",
+  email: "Email",
+  date: "Date",
+  time: "Time",
+  people: "Guests",
+  occasion: "Occasion",
+  message: "Special requests",
+});
 
 export default function BookATable() {
-  useEffect(() => {
-    AOS.init({ duration: 600, easing: "ease-in-out", once: true });
-  }, []);
-
   return (
     <section
       id="book-a-table"
       className="book-a-table section light-background"
     >
+      <div className="container section-title" data-aos="fade-up">
+        <span className="description-title">Reservations</span>
+        <h2>Book a table</h2>
+        <p>
+          Reserve a table for family dinners, celebrations or business meals.
+          We&apos;ll confirm your booking by phone.
+        </p>
+      </div>
+
       <div className="container" data-aos="fade-up" data-aos-delay="100">
         <div className="row">
           <div className="col-12">
@@ -27,22 +41,18 @@ export default function BookATable() {
                 >
                   <div className="reservation-form-section">
                     <div className="form-header text-center">
-                      <h3>Book Your Table</h3>
-                      <p>
-                        Enjoy a memorable dining experience at Hotel Mubarak.
-                        Choose your date and time to savor South Indian,
-                        Chinese, or Arabic halal specialties.
-                      </p>
+                      <h3>Your booking</h3>
                     </div>
 
-                    <form className="php-email-form" role="form">
+                    <form className="php-email-form" onSubmit={onReserve}>
                       <div className="row gy-3">
                         <div className="col-12">
                           <input
                             type="text"
                             name="name"
                             className="form-control"
-                            placeholder="Full Name"
+                            placeholder="Full name"
+                            aria-label="Full name"
                             required
                           />
                         </div>
@@ -51,7 +61,8 @@ export default function BookATable() {
                             type="email"
                             className="form-control"
                             name="email"
-                            placeholder="Email Address"
+                            placeholder="Email address"
+                            aria-label="Email address"
                             required
                           />
                         </div>
@@ -60,7 +71,8 @@ export default function BookATable() {
                             type="tel"
                             className="form-control"
                             name="phone"
-                            placeholder="Phone Number"
+                            placeholder="Phone number"
+                            aria-label="Phone number"
                             required
                           />
                         </div>
@@ -119,14 +131,14 @@ export default function BookATable() {
                         <div className="loading">Loading</div>
                         <div className="error-message"></div>
                         <div className="sent-message">
-                          Your reservation request has been submitted
-                          successfully. We'll confirm your booking shortly.
+                          Your email app has opened with your booking. Press
+                          send and we&apos;ll call to confirm.
                         </div>
                       </div>
 
-                      <button type="submit" className="btn-reserve w-100">
-                        <i className="bi bi-calendar-check me-2"></i>
-                        Reserve Table
+                      <button type="submit" className="btn-mb w-100">
+                        <i className="bi bi-calendar-check"></i>
+                        Reserve table
                       </button>
                     </form>
                   </div>
@@ -146,7 +158,7 @@ export default function BookATable() {
                         className="img-fluid"
                       />
                       <div className="overlay-content">
-                        <h4>Fine Dining & Events</h4>
+                        <h4>Fine dining &amp; events</h4>
                         <p>
                           Delight in a wide variety of cuisines, enjoy outdoor
                           seating, and host parties or events in our comfortable
@@ -155,68 +167,20 @@ export default function BookATable() {
                       </div>
                     </div>
 
-                    <div className="info-cards">
-                      <div className="row g-3">
-                        <InfoCard
-                          icon="bi-clock"
-                          title="Business Hours"
-                          content={<>Monday - Sunday: 08:00 AM - 11:00 PM</>}
-                          delay={400}
-                        />
-                        <InfoCard
-                          icon="bi-geo-alt-fill"
-                          title="Location"
-                          content={
-                            <>
-                              Hotel Mubarak
-                              <br />
-                              Marthandam, Kanyakumari
-                            </>
-                          }
-                          delay={450}
-                        />
-                        <InfoCard
-                          icon="bi-telephone-fill"
-                          title="Reservations"
-                          content={
-                            <>
-                              +91 4651 270 999
-                              <br />
-                              <small>
-                                Book in advance for parties & weekends
-                              </small>
-                            </>
-                          }
-                          delay={500}
-                        />
-                        <InfoCard
-                          icon="bi-envelope-fill"
-                          title="Email Us"
-                          content={
-                            <>
-                              reservations@hotelmubarak.com
-                              <br />
-                              <small>We respond within 24 hours</small>
-                            </>
-                          }
-                          delay={550}
-                        />
-                      </div>
-                    </div>
-
-                    <div
-                      className="additional-info"
-                      data-aos="fade-up"
-                      data-aos-delay={600}
-                    >
-                      <div className="info-highlight">
-                        <i className="bi bi-star-fill"></i>
-                        <span>
-                          Recommended to book 2-3 days in advance, especially
-                          for weekend dining and events.
-                        </span>
-                      </div>
-                    </div>
+                    <ul className="booking-tips">
+                      <BookingTip icon="bi-calendar-week" title="Plan ahead">
+                        Book 2–3 days in advance, especially for weekend dining
+                        and events.
+                      </BookingTip>
+                      <BookingTip icon="bi-chat-heart" title="Tell us more">
+                        Add the occasion or any dietary needs in the form and
+                        we&apos;ll be ready for you.
+                      </BookingTip>
+                      <BookingTip icon="bi-telephone" title="Prefer to call?">
+                        <a href="tel:+914651270999">+91 4651 270 999</a>, every
+                        day from 8:00 AM to 11:00 PM.
+                      </BookingTip>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -228,19 +192,16 @@ export default function BookATable() {
   );
 }
 
-// InfoCard Component
-function InfoCard({ icon, title, content, delay }) {
+function BookingTip({ icon, title, children }) {
   return (
-    <div className="col-md-6" data-aos="zoom-in" data-aos-delay={delay}>
-      <div className="info-card">
-        <div className="card-icon">
-          <i className={`bi ${icon}`}></i>
-        </div>
-        <div className="card-content">
-          <h5>{title}</h5>
-          <p>{content}</p>
-        </div>
+    <li>
+      <span className="booking-tip-icon" aria-hidden="true">
+        <i className={`bi ${icon}`}></i>
+      </span>
+      <div>
+        <h4>{title}</h4>
+        <p>{children}</p>
       </div>
-    </div>
+    </li>
   );
 }

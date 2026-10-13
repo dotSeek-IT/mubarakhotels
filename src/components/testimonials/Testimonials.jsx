@@ -76,8 +76,8 @@ export default function Testimonials() {
   return (
     <section id="testimonials" className="testimonials section">
       <div className="container section-title" data-aos="fade-up">
-        <span className="description-title">Testimonials</span>
-        <h2>What Our Guests Say</h2>
+        <span className="description-title">Reviews</span>
+        <h2>What our guests say</h2>
         <p>
           Read feedback from our satisfied guests about dining, events, and
           hospitality at Mubarak Family Restaurant, Marthandam.

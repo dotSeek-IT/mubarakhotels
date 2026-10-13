@@ -1,4 +1,4 @@
-import { Roboto, Roboto_Slab, Source_Serif_4 } from "next/font/google";
+import { Great_Vibes, Roboto } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "aos/dist/aos.css";
@@ -10,12 +10,18 @@ import TemplateScripts from "@/components/utils/TemplateScripts";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import ScrollTop from "@/components/scrollTop/ScrollTop";
+import FloatingBar from "@/components/floatingBar/FloatingBar";
 
-const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
-const robotoSlab = Roboto_Slab({ subsets: ["latin"], weight: ["400", "700"] });
-const sourceSerif = Source_Serif_4({
+// Fonts: see mubarak.md. Chillax (headings/nav) loads from Fontshare below.
+const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
+});
+const greatVibes = Great_Vibes({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-great-vibes",
 });
 
 export const metadata = {
@@ -58,13 +64,23 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${roboto.className} ${robotoSlab.className} ${sourceSerif.className}`}
-      >
+    <html
+      lang="en"
+      className={`${roboto.variable} ${greatVibes.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600&display=swap"
+        />
+      </head>
+      <body>
         <Header />
         {children}
         <Footer />
+        <FloatingBar />
         <ScrollTop />
         <TemplateScripts />
       </body>

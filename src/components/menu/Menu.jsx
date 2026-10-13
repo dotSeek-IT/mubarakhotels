@@ -1,154 +1,205 @@
 "use client";
 
-import MenuCard from "@/components/cards/MenuCard";
-import RecommendationCard from "@/components/cards/RecommendationCard";
+import { useEffect, useRef, useState } from "react";
+import { menuCategories, menuGroups, menuSpecials } from "@/data/menuData";
+
+// Fixed header height + sticky tab bar, used to offset scrolling to a group.
+const SCROLL_OFFSET = 150;
+
+const formatPrice = (value) =>
+  typeof value === "number" ? `₹${value}` : value ?? "—";
+
+// Dish photo when we have one, otherwise an icon tile.
+function DishThumb({ image, icon, name, className = "" }) {
+  return image ? (
+    <img src={image} alt={name} className={`dish-thumb ${className}`} />
+  ) : (
+    <span className={`dish-thumb dish-icon ${className}`} aria-hidden="true">
+      <i className={`bi ${icon}`}></i>
+    </span>
+  );
+}
+
+function SpecialCard({ name, label, price, image, icon, description }) {
+  return (
+    <div className="menu-special">
+      <span className="menu-special-label">{label}</span>
+      <DishThumb
+        image={image}
+        icon={icon}
+        name={name}
+        className="menu-special-image"
+      />
+      <div className="menu-special-body">
+        <div className="menu-special-head">
+          <h5>{name}</h5>
+          <span className="menu-special-price">{price}</span>
+        </div>
+        <p>{description}</p>
+      </div>
+    </div>
+  );
+}
+
+function PriceRow({ item, portions, icon }) {
+  const hasPortions = item.half != null || item.full != null;
+  return (
+    <li>
+      <DishThumb image={item.image} icon={item.icon ?? icon} name={item.name} />
+      <span className="item-name">{item.name}</span>
+      <span className="item-dots" aria-hidden="true"></span>
+      <span className="item-prices">
+        {portions && hasPortions ? (
+          <>
+            <span data-label="Half">{formatPrice(item.half)}</span>
+            <span data-label="Full">{formatPrice(item.full)}</span>
+          </>
+        ) : (
+          <span className="single">
+            {hasPortions
+              ? `${formatPrice(item.half)} / ${formatPrice(item.full)}`
+              : formatPrice(item.price)}
+          </span>
+        )}
+      </span>
+    </li>
+  );
+}
 
 export default function Menu() {
-  const menuItems = [
-    {
-      image: "assets/img/menu/starter-1.jpg",
-      alt: "South Indian Starter",
-      badges: [{ label: "V", className: "badge-vegetarian" }],
-      price: "₹250",
-      title: "Masala Dosa",
-      description:
-        "Crispy rice crepe filled with spiced potato masala, served with coconut chutney and sambar.",
-      spiceLevel: 2,
-      category: "filter-starters",
-    },
-    {
-      image: "assets/img/menu/main-2.jpg",
-      alt: "Chinese Main Course",
-      badges: [{ label: "Chef's Choice", className: "badge-chef" }],
-      price: "₹450",
-      title: "Kung Pao Chicken",
-      description:
-        "Stir-fried chicken with peanuts, vegetables, and spicy Sichuan sauce, a perfect blend of flavors.",
-      spiceLevel: 3,
-      featured: true,
-      category: "filter-main",
-    },
-    {
-      image: "assets/img/menu/main-3.jpg",
-      alt: "Arabic Special",
-      badges: [{ label: "Halal", className: "badge-halal" }],
-      price: "₹600",
-      title: "Chicken Shawarma Platter",
-      description:
-        "Tender marinated chicken served with garlic sauce, salad, and warm pita bread.",
-      spiceLevel: 2,
-      category: "filter-main",
-    },
-  ];
+  const [activeGroup, setActiveGroup] = useState(menuGroups[0].id);
+  const tabsRef = useRef(null);
 
-  const recommendations = [
-    {
-      image: "assets/img/menu/main-2.jpg",
-      alt: "Chef Recommendation",
-      chefBadge: "Chef's Pick",
-      title: "Hyderabadi Biryani",
-      price: "₹500",
-      description:
-        "Aromatic basmati rice layered with tender meat and traditional spices, slow-cooked to perfection.",
-      preparation: "40 min preparation",
-      dietaryBadges: [{ label: "Halal", className: "badge-halal" }],
-    },
-    {
-      image: "assets/img/menu/main-3.jpg",
-      alt: "Chef Recommendation",
-      chefBadge: "Chef's Pick",
-      title: "Paneer Butter Masala",
-      price: "₹350",
-      description:
-        "Cottage cheese cubes simmered in rich tomato-based gravy with butter and cream, a vegetarian delight.",
-      preparation: "20 min preparation",
-      dietaryBadges: [{ label: "V", className: "badge-vegetarian" }],
-    },
-  ];
+  const groups = menuGroups.map((g) => ({
+    ...g,
+    categories: menuCategories.filter((c) => c.group === g.id),
+    specials: menuSpecials.filter((s) => s.group === g.id),
+  }));
+
+  // Highlight the tab of the group currently under the sticky bar.
+  useEffect(() => {
+    const onScroll = () => {
+      let current = menuGroups[0].id;
+      for (const g of menuGroups) {
+        const el = document.getElementById(`menu-${g.id}`);
+        if (el && el.getBoundingClientRect().top <= SCROLL_OFFSET + 10) {
+          current = g.id;
+        }
+      }
+      setActiveGroup(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Keep the active tab visible in the horizontally scrolling tab bar.
+  useEffect(() => {
+    const bar = tabsRef.current;
+    const tab = bar?.querySelector(`[data-group="${activeGroup}"]`);
+    if (!bar || !tab) return;
+    const left = tab.offsetLeft - bar.clientWidth / 2 + tab.clientWidth / 2;
+    bar.scrollTo({ left, behavior: "smooth" });
+  }, [activeGroup]);
+
+  const goToGroup = (id) => {
+    const el = document.getElementById(`menu-${id}`);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
 
   return (
-    <section id="menu" className="menu section light-background">
-      <div className="container section-title" data-aos="fade-up">
-        <span className="description-title">Menu</span>
-        <h2>Our Specialties</h2>
-        <p>
-          Explore the diverse flavors at Mubarak Family Restaurant – from South
-          Indian classics to Chinese delights and authentic Arabic halal dishes.
-        </p>
-      </div>
-
-      <div className="container" data-aos="fade-up" data-aos-delay="100">
-        <div
-          className="isotope-layout"
-          data-default-filter="*"
-          data-layout="masonry"
-          data-sort="original-order"
-        >
-          <div
-            className="menu-filters isotope-filters mb-5"
-            data-aos="fade-up"
-            data-aos-delay="200"
-          >
-            <ul>
-              <li data-filter="*" className="filter-active">
-                All Dishes
-              </li>
-              <li data-filter=".filter-starters">Starters</li>
-              <li data-filter=".filter-main">Main Courses</li>
-              <li data-filter=".filter-dessert">Desserts</li>
-              <li data-filter=".filter-drinks">Beverages</li>
-            </ul>
+    <section id="menu" className="menu section dark-background">
+      <div className="menu-split">
+        {/* Left: fixed photo panel */}
+        <aside className="menu-panel">
+          <img
+            src="assets/img/menu/web/menu-panel.jpg"
+            alt="Biriyani served at Mubarak Family Restaurant"
+            className="menu-panel-image"
+          />
+          <div className="menu-panel-content">
+            <span className="menu-panel-script">Check Out</span>
+            <h2>Our Menu</h2>
+            <p>
+              South Indian, Kerala, Chinese and Arabian favourites. All halal,
+              cooked fresh in Marthandam.
+            </p>
+            <a
+              href="assets/menu/mubarak-menu.pdf"
+              className="menu-panel-download"
+              target="_blank"
+              rel="noopener noreferrer"
+              download
+            >
+              <i className="bi bi-download"></i> Download menu (PDF)
+            </a>
           </div>
+        </aside>
 
-          <div
-            className="menu-grid isotope-container row gy-5"
-            data-aos="fade-up"
-            data-aos-delay="300"
-          >
-            {menuItems.map((item, idx) => (
-              <MenuCard key={idx} {...item} />
+        {/* Right: scrolling menu list */}
+        <div className="menu-list">
+          <nav className="menu-tabs" ref={tabsRef} aria-label="Menu sections">
+            {menuGroups.map((g) => (
+              <button
+                key={g.id}
+                type="button"
+                data-group={g.id}
+                className={activeGroup === g.id ? "active" : ""}
+                aria-current={activeGroup === g.id ? "true" : undefined}
+                onClick={() => goToGroup(g.id)}
+              >
+                {g.title}
+              </button>
             ))}
-          </div>
+          </nav>
 
-          <div className="menu-actions" data-aos="fade-up" data-aos-delay="400">
-            <div className="row align-items-center">
-              <div className="col-md-8">
-                <div className="seasonal-notice">
-                  <i className="bi bi-info-circle"></i>
-                  <span>
-                    Our menu features seasonal specialties and fresh
-                    ingredients, ensuring an authentic and flavorful experience.
-                  </span>
-                </div>
-              </div>
-              <div className="col-md-4 text-md-end">
-                <a href="#" className="menu-download-btn">
-                  <i className="bi bi-download"></i>
-                  <span>Download Full Menu PDF</span>
-                </a>
-              </div>
-            </div>
-          </div>
+          <div className="menu-list-inner">
+            <p className="menu-note">
+              <i className="bi bi-info-circle"></i> All prices in Indian Rupees
+              (₹). Half / Full columns show portion sizes.
+            </p>
 
-          <div
-            className="chef-recommendations"
-            data-aos="fade-up"
-            data-aos-delay="500"
-          >
-            <div className="section-header">
-              <h3>
-                <i className="bi bi-star-fill"></i> Chef's Recommendations
-              </h3>
-              <p>
-                Handpicked specialties showcasing the finest flavors from South
-                India, China, and Arabia.
-              </p>
-            </div>
-            <div className="row g-4">
-              {recommendations.map((rec, idx) => (
-                <RecommendationCard key={idx} {...rec} />
-              ))}
-            </div>
+            {groups.map((group) => (
+              <div key={group.id} id={`menu-${group.id}`} className="menu-group">
+                <h3 className="menu-group-title">{group.title}</h3>
+
+                {group.specials.map((s) => (
+                  <SpecialCard
+                    key={s.name}
+                    icon={group.categories[0]?.icon}
+                    {...s}
+                  />
+                ))}
+
+                {group.categories.map((cat) => (
+                  <div key={cat.id} className="menu-category">
+                    {(group.categories.length > 1 || cat.portions) && (
+                      <div className="menu-category-header">
+                        <h4>{group.categories.length > 1 ? cat.title : ""}</h4>
+                        {cat.portions && (
+                          <div className="portion-labels">
+                            <span>Half</span>
+                            <span>Full</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                    <ul className="menu-price-list">
+                      {cat.items.map((item) => (
+                        <PriceRow
+                          key={item.name}
+                          item={item}
+                          portions={cat.portions}
+                          icon={cat.icon}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>

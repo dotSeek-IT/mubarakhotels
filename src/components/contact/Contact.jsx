@@ -1,121 +1,111 @@
 "use client";
 
-import { useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { DIRECTIONS_URL } from "@/components/location/Location";
+import { emailFormHandler } from "@/components/utils/emailForm";
+
+const onSend = emailFormHandler("Website enquiry", {
+  name: "Name",
+  email: "Email",
+  subject: "Subject",
+  message: "Message",
+});
 
 export default function Contact() {
-  useEffect(() => {
-    AOS.init({ duration: 600, easing: "ease-in-out", once: true });
-  }, []);
-
   return (
     <section id="contact" className="contact section light-background">
-      {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
-        <span className="description-title">Contact</span>
-        <h2>Contact</h2>
+        <span className="description-title">Get in touch</span>
+        <h2>Contact us</h2>
         <p>
-          Reach out to Mubarak Family Restaurant in Marthandam for reservations,
-          events, or general inquiries. Our team is ready to assist you.
+          Questions about reservations, events or catering? Send us a message
+          and our team will get back to you.
         </p>
       </div>
 
       <div className="container" data-aos="fade-up" data-aos-delay="100">
-        {/* Contact Info Boxes */}
-        <div className="row gy-4 mb-5">
-          <ContactInfoBox
-            delay={100}
-            icon="bi-geo-alt"
-            title="Our Address"
-            lines={[
-              "2-76-A2, Safiya Complex, Main Road, Marthandam, KK District, Tamilnadu - 629165, India",
-            ]}
-          />
-          <ContactInfoBox
-            delay={200}
-            icon="bi-envelope"
-            title="Email Address"
-            lines={["mubarakhotels@yahoo.co.in"]}
-          />
-          <ContactInfoBox
-            delay={300}
-            icon="bi-headset"
-            title="Hours of Operation"
-            lines={["Monday - Sunday: 08:00 AM - 11:00 PM"]}
-          />
-        </div>
-      </div>
+        <div className="row g-4">
+          <div className="col-lg-4">
+            <aside className="contact-aside">
+              <h3>Talk to us</h3>
+              <ul>
+                <ContactLine icon="bi-telephone" label="Call">
+                  <a href="tel:+914651270999">+91 4651 270 999</a>
+                </ContactLine>
+                <ContactLine icon="bi-envelope" label="Email">
+                  <a href="mailto:mubarakhotels@yahoo.co.in">
+                    mubarakhotels@yahoo.co.in
+                  </a>
+                </ContactLine>
+                <ContactLine icon="bi-geo-alt" label="Visit">
+                  Main Road, Marthandam
+                  <br />
+                  <a
+                    href={DIRECTIONS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Get directions <i className="bi bi-arrow-up-right"></i>
+                  </a>
+                </ContactLine>
+                <ContactLine icon="bi-clock" label="Hours">
+                  Every day, 8:00 AM – 11:00 PM
+                </ContactLine>
+              </ul>
+            </aside>
+          </div>
 
-      {/* Google Maps */}
-      <div className="map-section" data-aos="fade-up" data-aos-delay="200">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.514567760466!2d77.25782087548238!3d8.292500593900032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b03ec0a3d019eaf%3A0x3e1b8db15f3d30b8!2sMubarak%20Hotel!5e0!3m2!1sen!2sin!4v1692945600000!5m2!1sen!2sin"
-          width="100%"
-          height="500"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
-
-      {/* Contact Form */}
-      <div className="container form-container-overlap">
-        <div
-          className="row justify-content-center"
-          data-aos="fade-up"
-          data-aos-delay="300"
-        >
-          <div className="col-lg-10">
+          <div className="col-lg-8">
             <div className="contact-form-wrapper">
-              <h2 className="text-center mb-4">Get in Touch</h2>
-
-              <form
-                action="forms/contact.php"
-                method="post"
-                className="php-email-form"
-              >
+              <form className="php-email-form" onSubmit={onSend}>
                 <div className="row g-3">
                   <FormInput
                     name="name"
                     type="text"
                     icon="bi-person"
-                    placeholder="Full Name"
+                    label="Full name"
                   />
                   <FormInput
                     name="email"
                     type="email"
                     icon="bi-envelope"
-                    placeholder="Email Address"
+                    label="Email address"
                   />
                   <FormInput
                     name="subject"
                     type="text"
                     icon="bi-text-left"
-                    placeholder="Subject"
+                    label="Subject"
+                    full
                   />
-                  <FormTextarea
-                    name="message"
-                    icon="bi-chat-dots message-icon"
-                    placeholder="Write Message..."
-                    rows={6}
-                  />
+                  <div className="col-12">
+                    <label className="visually-hidden" htmlFor="contact-message">
+                      Message
+                    </label>
+                    <div className="input-with-icon">
+                      <i className="bi bi-chat-dots message-icon"></i>
+                      <textarea
+                        id="contact-message"
+                        className="form-control"
+                        name="message"
+                        placeholder="Write your message…"
+                        rows={6}
+                        required
+                      ></textarea>
+                    </div>
+                  </div>
 
                   <div className="col-12">
                     <div className="loading">Loading</div>
                     <div className="error-message"></div>
                     <div className="sent-message">
-                      Your message has been sent. Thank you!
+                      Your email app has opened with your message. Press send
+                      and we&apos;ll reply soon.
                     </div>
                   </div>
 
-                  <div className="col-12 text-center">
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-submit"
-                    >
-                      SEND MESSAGE
+                  <div className="col-12">
+                    <button type="submit" className="btn-mb">
+                      Send message <i className="bi bi-send"></i>
                     </button>
                   </div>
                 </div>
@@ -128,60 +118,37 @@ export default function Contact() {
   );
 }
 
-// Contact Info Box
-function ContactInfoBox({ delay, icon, title, lines }) {
+function ContactLine({ icon, label, children }) {
   return (
-    <div className="col-lg-4" data-aos="fade-up" data-aos-delay={delay}>
-      <div className="contact-info-box">
-        <div className="icon-box">
-          <i className={`bi ${icon}`}></i>
-        </div>
-        <div className="info-content">
-          <h4>{title}</h4>
-          {lines.map((line, idx) => (
-            <p key={idx}>{line}</p>
-          ))}
-        </div>
+    <li>
+      <span className="contact-icon" aria-hidden="true">
+        <i className={`bi ${icon}`}></i>
+      </span>
+      <div>
+        <span className="contact-label">{label}</span>
+        <p>{children}</p>
       </div>
-    </div>
+    </li>
   );
 }
 
-// Form Input Component
-function FormInput({ name, type, icon, placeholder }) {
+function FormInput({ name, type, icon, label, full = false }) {
+  const id = `contact-${name}`;
   return (
-    <div className="col-md-6">
-      <div className="form-group">
-        <div className="input-with-icon">
-          <i className={`bi ${icon}`}></i>
-          <input
-            type={type}
-            className="form-control"
-            name={name}
-            placeholder={placeholder}
-            required
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Form Textarea Component
-function FormTextarea({ name, icon, placeholder, rows }) {
-  return (
-    <div className="col-12">
-      <div className="form-group">
-        <div className="input-with-icon">
-          <i className={`bi ${icon}`}></i>
-          <textarea
-            className="form-control"
-            name={name}
-            placeholder={placeholder}
-            rows={rows}
-            required
-          ></textarea>
-        </div>
+    <div className={full ? "col-12" : "col-md-6"}>
+      <label className="visually-hidden" htmlFor={id}>
+        {label}
+      </label>
+      <div className="input-with-icon">
+        <i className={`bi ${icon}`}></i>
+        <input
+          id={id}
+          type={type}
+          className="form-control"
+          name={name}
+          placeholder={label}
+          required
+        />
       </div>
     </div>
   );
