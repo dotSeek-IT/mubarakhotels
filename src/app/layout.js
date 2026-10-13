@@ -132,7 +132,7 @@ const RESTAURANT_JSON_LD = {
     },
   ],
   servesCuisine: ["South Indian", "Kerala", "Chinese", "Arabian", "Halal"],
-  priceRange: "₹₹",
+  priceRange: "₹",
   currenciesAccepted: "INR",
   hasMenu: `${SITE_URL}/#menu`,
   acceptsReservations: true,
