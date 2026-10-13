@@ -179,6 +179,14 @@ Never stack shadows.
 - **"Book a table" appears in:** the nav link, the hero button, the floating bar and the footer link list. Events uses "Book now" for event bookings. Don't add more booking buttons. Location's actions are "Get directions" and "Call us".
 - **Contact details** (address, hours, phone, email) live in Location, Contact and the footer. Don't repeat them as cards in other sections.
 
+## Deployment
+
+- **Hosting:** Vercel, project `dotseek/mubarakhotels`, connected to the GitHub repo `dotSeek-IT/mubarakhotels` (branch `main`).
+- **To deploy:** commit and `git push`. Vercel builds and publishes automatically within a minute or two. There is no deploy script.
+- **Domain:** `www.mubarakhotels.com` (production). `mubarakhotels.com` redirects to `www` (308). DNS is managed at GoDaddy; the `www` CNAME and `@` A record point to Vercel. Don't change them.
+- **Check before pushing:** `npm run build` must pass. Stop the dev server first: building while `npm run dev` is running corrupts `.next`. If localhost breaks, delete `.next` and restart.
+- **Next.js version:** keep it on the latest 15.5.x patch. Vercel blocks deploys of Next.js versions with known security advisories.
+
 ## Constraints
 
 ### Always
