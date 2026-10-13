@@ -25,6 +25,8 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata = {
+  // Absolute base for Open Graph / Twitter image URLs in link previews.
+  metadataBase: new URL("https://www.mubarakhotels.com"),
   title: "Mubarak Family Restaurant | Marthandam, Kanyakumari",
   description:
     "Family-friendly dining and hospitality in Marthandam, Kanyakumari.",
