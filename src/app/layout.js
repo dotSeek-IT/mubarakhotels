@@ -24,50 +24,124 @@ const greatVibes = Great_Vibes({
   variable: "--font-great-vibes",
 });
 
+const SITE_URL = "https://www.mubarakhotels.com";
+const TITLE = "Mubarak Family Restaurant Marthandam | Halal Multi-Cuisine";
+const DESCRIPTION =
+  "Halal family restaurant in Marthandam, Kanyakumari. South Indian, Kerala, Chinese and Arabian dishes, biriyani, rooms and event spaces. Open daily 8 AM–11 PM.";
+const OG_IMAGE = {
+  url: "/assets/img/og-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Biriyani at Mubarak Family Restaurant, Marthandam",
+};
+
 export const metadata = {
-  // Absolute base for Open Graph / Twitter image URLs in link previews.
-  metadataBase: new URL("https://www.mubarakhotels.com"),
-  title: "Mubarak Family Restaurant | Marthandam, Kanyakumari",
-  description:
-    "Family-friendly dining and hospitality in Marthandam, Kanyakumari.",
+  // Absolute base for canonical, Open Graph and Twitter URLs.
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  applicationName: "Mubarak Family Restaurant",
   keywords: [
-    "Restaurant",
-    "luxury restaurant",
+    "Mubarak Hotel",
     "Mubarak Family Restaurant",
-    "Marthandam",
-    "Kanyakumari",
-    "Multi-cuisine",
-    "South Indian",
-    "Chinese",
-    "Arabic",
-    "Room bookings",
-    "Event bookings",
-    "Hotel",
+    "restaurant in Marthandam",
+    "halal restaurant Kanyakumari",
+    "biriyani Marthandam",
+    "Kerala food Marthandam",
+    "South Indian restaurant",
+    "Chinese restaurant Marthandam",
+    "Arabian food Al Faham",
+    "family restaurant Kanyakumari",
+    "party hall Marthandam",
+    "hotel rooms Marthandam",
   ],
   authors: [{ name: "Alameen Amaanullah" }],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: "/assets/img/favicon.ico",
   },
   openGraph: {
-    title: "Mubarak Family Restaurant | Marthandam, Kanyakumari",
-    description:
-      "Family-friendly dining and hospitality in Marthandam, Kanyakumari.",
-    url: "https://www.mubarakhotels.com",
-    images: ["/assets/img/mubarak_logo.png"],
+    type: "website",
+    locale: "en_IN",
+    url: "/",
+    siteName: "Mubarak Family Restaurant",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mubarak Family Restaurant | Marthandam, Kanyakumari",
-    description:
-      "Family-friendly dining and hospitality in Marthandam, Kanyakumari.",
-    images: ["/assets/img/mubarak_logo.png"],
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE.url],
   },
+};
+
+// Google structured data: lets search show address, hours, cuisine, phone.
+const RESTAURANT_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "@id": `${SITE_URL}/#restaurant`,
+  name: "Mubarak Family Restaurant",
+  alternateName: "Mubarak Hotel & Family Restaurant",
+  url: SITE_URL,
+  image: [`${SITE_URL}/assets/img/og-image.jpg`],
+  logo: `${SITE_URL}/assets/img/mubarak_logo.png`,
+  description: DESCRIPTION,
+  telephone: "+91-4651-270-999",
+  email: "mubarakhotels@yahoo.co.in",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "2-76-A2, Safiya Complex, Main Road",
+    addressLocality: "Marthandam",
+    addressRegion: "Tamil Nadu",
+    postalCode: "629165",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 8.2925,
+    longitude: 77.2578,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "08:00",
+      closes: "23:00",
+    },
+  ],
+  servesCuisine: ["South Indian", "Kerala", "Chinese", "Arabian", "Halal"],
+  priceRange: "₹₹",
+  currenciesAccepted: "INR",
+  hasMenu: `${SITE_URL}/#menu`,
+  acceptsReservations: true,
 };
 
 export default function RootLayout({ children }) {
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${roboto.variable} ${greatVibes.variable}`}
       suppressHydrationWarning
     >
@@ -76,6 +150,12 @@ export default function RootLayout({ children }) {
         <link
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600&display=swap"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(RESTAURANT_JSON_LD),
+          }}
         />
       </head>
       <body>
