@@ -1,13 +1,16 @@
 "use client";
 
-export default function Events() {
+export default function Events({ asPage = false }) {
+  // On its own page this section holds the page <h1>.
+  const Heading = asPage ? "h1" : "h2";
+
   return (
     <section id="events" className="events section light-background">
       <div className="container" data-aos="fade-up" data-aos-delay="100">
         {/* Section Title */}
         <div className="container section-title" data-aos="fade-up">
           <span className="description-title">Celebrate</span>
-          <h2>Events & parties</h2>
+          <Heading>Events & parties</Heading>
           <p>
             Celebrate your special moments at Mubarak Family Restaurant,
             Marthandam. We host private parties, corporate events, and festive
@@ -26,10 +29,10 @@ export default function Events() {
               <span className="seasonal-badge">Private events</span>
               <h2>Host your event with us</h2>
               <p>
-                From intimate celebrations to large parties, Mubarak Family
-                Restaurant provides versatile spaces and a curated menu
-                featuring South Indian, Chinese, and special Arabic halal
-                dishes.
+                From intimate celebrations and large parties to conferences
+                and business meetings, Mubarak Hotel provides a party hall,
+                a conference hall and a curated menu featuring South Indian,
+                Chinese and Arabian halal dishes.
               </p>
               <div className="btn-group-mb justify-content-center">
                 <a href="#book-a-table" className="btn-mb">
@@ -47,11 +50,11 @@ export default function Events() {
         <div className="row g-4 mb-5" data-aos="fade-up" data-aos-delay="200">
           <FeatureCard
             delay={250}
-            imgSrc="assets/img/showcase-1.jpg"
+            imgSrc="/assets/img/showcase-1.jpg"
             badgeIcon="bi-star-fill"
             badgeText="Banquet Hall"
             title="Elegant banquet spaces"
-            description="Spacious and beautifully decorated halls suitable for weddings, parties, and corporate events."
+            description="Spacious party and banquet halls for weddings, receptions and birthdays, plus a conference hall for meetings and corporate events."
             highlights={[
               "Indoor & Outdoor Options",
               "Customizable Seating Arrangements",
@@ -60,7 +63,7 @@ export default function Events() {
           />
           <FeatureCard
             delay={300}
-            imgSrc="assets/img/showcase-2.jpg"
+            imgSrc="/assets/img/showcase-2.jpg"
             badgeIcon="bi-award-fill"
             badgeText="Catering"
             title="Gourmet catering"

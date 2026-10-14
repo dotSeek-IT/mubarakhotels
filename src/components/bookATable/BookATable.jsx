@@ -13,7 +13,10 @@ const onReserve = emailFormHandler("Table reservation request", {
   message: "Special requests",
 });
 
-export default function BookATable() {
+export default function BookATable({ asPage = false }) {
+  // On its own page this section holds the page <h1>.
+  const Heading = asPage ? "h1" : "h2";
+
   return (
     <section
       id="book-a-table"
@@ -21,7 +24,7 @@ export default function BookATable() {
     >
       <div className="container section-title" data-aos="fade-up">
         <span className="description-title">Reservations</span>
-        <h2>Book a table</h2>
+        <Heading>Book a table</Heading>
         <p>
           Reserve a table for family dinners, celebrations or business meals.
           We&apos;ll confirm your booking by phone.
@@ -153,7 +156,7 @@ export default function BookATable() {
                   <div className="reservation-info-section">
                     <div className="hero-image">
                       <img
-                        src="assets/img/showcase-5.jpg"
+                        src="/assets/img/showcase-5.jpg"
                         alt="Hotel Mubarak dining area"
                         className="img-fluid"
                       />

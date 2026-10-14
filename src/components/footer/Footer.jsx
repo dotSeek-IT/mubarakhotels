@@ -3,12 +3,13 @@
 import { DIRECTIONS_URL } from "@/components/location/Location";
 
 const QUICK_LINKS = [
-  { label: "Home", href: "#hero" },
-  { label: "About", href: "#about" },
-  { label: "Menu", href: "#menu" },
-  { label: "Book a table", href: "#book-a-table" },
-  { label: "Events", href: "#events" },
-  { label: "Contact", href: "#contact" },
+  // Real page URLs (not #anchors) so Google can find and list each page.
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about/" },
+  { label: "Menu", href: "/menu/" },
+  { label: "Book a table", href: "/book-a-table/" },
+  { label: "Events", href: "/events/" },
+  { label: "Contact", href: "/contact/" },
 ];
 
 export default function Footer() {
@@ -17,9 +18,9 @@ export default function Footer() {
       <div className="container">
         <div className="row gy-5 footer-main">
           <div className="col-lg-4">
-            <a href="#hero" className="footer-brand">
-              <img src="assets/img/mubarak_logo.png" alt="Mubarak Hotel logo" />
-              <span>Mubarak Family Restaurant</span>
+            <a href="/" className="footer-brand">
+              <img src="/assets/img/mubarak_logo.png" alt="Mubarak Hotel logo" />
+              <span>Mubarak Hotel &amp; Family Restaurant</span>
             </a>
             <p className="footer-about">
               Multi-cuisine family dining in Marthandam, Kanyakumari: South
@@ -96,7 +97,7 @@ export default function Footer() {
       <div className="footer-bottom">
         <div className="container">
           <p>
-            © {new Date().getFullYear()} Mubarak Family Restaurant. All rights
+            © {new Date().getFullYear()} Mubarak Hotel &amp; Family Restaurant. All rights
             reserved.
           </p>
           <p className="credits">

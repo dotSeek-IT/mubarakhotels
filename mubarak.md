@@ -185,6 +185,16 @@ Never stack shadows.
 - **"Book a table" appears in:** the nav link, the hero button, the floating bar and the footer link list. Events uses "Book now" for event bookings. Don't add more booking buttons. Location's actions are "Get directions" and "Call us".
 - **Contact details** (address, hours, phone, email) live in Location, Contact and the footer. Don't repeat them as cards in other sections.
 
+## Pages and SEO
+
+- **Pages:** `/` (all sections), plus `/menu/`, `/about/`, `/book-a-table/`, `/events/` and `/contact/` (folders in `src/app/`). Inner pages wrap sections in `<main className="main inner-page">` and pass `asPage`, so the section heading becomes the page's only `<h1>`.
+- **Links:** the footer "Explore" list uses real page URLs so Google can find them. The nav and buttons use `#section` links; on an inner page, a section that isn't there opens `/#section`.
+- **Asset paths must start with `/`** (`/assets/img/...`). Relative `assets/...` paths break on inner pages.
+- **Metadata:** site-wide title, description, keywords and structured data are in `src/app/layout.js`. Per-page titles use `pageMetadata()` from `src/app/seo.js` (title template "%s | Mubarak Hotel Marthandam").
+- **Google structured data:** WebSite ("Mubarak Hotel"), Hotel (rooms, restaurant, party/banquet hall, conference/meeting hall) and Restaurant, with the same address, phones, hours and map location. Only list facilities that really exist.
+- **Name:** use "Mubarak Hotel & Family Restaurant" (as on the printed menu), with "Hotel Mubarak" and "Mubarak Family Restaurant" as alternate names.
+- **New page?** Add it to `src/app/sitemap.js`, then resubmit the sitemap in Search Console (property `mubarakhotels.com`, verified by the GoDaddy `@` TXT record).
+
 ## Deployment
 
 - **Hosting:** Vercel, project `dotseek/mubarakhotels`, connected to the GitHub repo `dotSeek-IT/mubarakhotels` (branch `main`).

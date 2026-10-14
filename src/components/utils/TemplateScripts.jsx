@@ -79,12 +79,17 @@ export default function TemplateScripts() {
 
       // ===== In-page anchor links =====
       // Always scroll to the target, even when the URL hash is unchanged.
-      document.querySelectorAll("a[href^='#']").forEach((link) =>
+      // "/#x" and "#x" both work; on inner pages a missing section opens "/#x".
+      document.querySelectorAll("a[href^='#'], a[href^='/#']").forEach((link) =>
         link.addEventListener("click", (e) => {
-          const hash = link.getAttribute("href");
+          const hash = link.getAttribute("href").replace(/^\//, "");
           if (hash.length < 2) return;
           const target = document.querySelector(hash);
-          if (!target) return;
+          if (!target) {
+            e.preventDefault();
+            window.location.href = "/" + hash;
+            return;
+          }
           e.preventDefault();
           if (hash === "#hero") {
             window.scrollTo({ top: 0, behavior: "smooth" });

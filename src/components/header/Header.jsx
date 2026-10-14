@@ -26,8 +26,8 @@ export default function Header() {
       {/* Branding & Navigation */}
       <div className="branding d-flex align-items-center">
         <div className="container position-relative d-flex align-items-center justify-content-between">
-          <a href="#hero" className="logo d-flex align-items-center">
-            <img src="assets/img/mubarak_logo.png" alt="Mubarak Hotel Logo" />
+          <a href="/#hero" className="logo d-flex align-items-center">
+            <img src="/assets/img/mubarak_logo.png" alt="Mubarak Hotel & Family Restaurant logo" />
           </a>
 
           {/* Phone: number on desktop, icon button beside the menu toggle on phones */}

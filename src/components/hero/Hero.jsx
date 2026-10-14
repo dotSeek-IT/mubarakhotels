@@ -6,7 +6,7 @@ export default function Hero() {
       {/* Hero Background Video */}
       <div className="hero-background">
         <video autoPlay muted loop playsInline>
-          <source src="assets/img/video.mp4" type="video/mp4" />
+          <source src="/assets/img/video.mp4" type="video/mp4" />
         </video>
         <div className="overlay"></div>
       </div>
@@ -16,7 +16,7 @@ export default function Hero() {
         <div className="row align-items-center g-5">
           <div className="col-lg-10 col-xl-8">
             <div className="hero-text" data-aos="fade-up" data-aos-delay="100">
-              <span className="hero-script">Welcome to Mubarak</span>
+              <span className="hero-script">Welcome to Mubarak Hotel</span>
               <h1 className="hero-title">
                 Comfort food &amp; <em>culinary delight</em>
               </h1>

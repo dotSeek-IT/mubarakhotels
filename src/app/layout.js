@@ -5,6 +5,7 @@ import "aos/dist/aos.css";
 import "swiper/css";
 import "glightbox/dist/css/glightbox.min.css";
 import "./globals.css";
+import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/app/seo";
 
 import TemplateScripts from "@/components/utils/TemplateScripts";
 import Header from "@/components/header/Header";
@@ -24,36 +25,45 @@ const greatVibes = Great_Vibes({
   variable: "--font-great-vibes",
 });
 
-const SITE_URL = "https://www.mubarakhotels.com";
-const TITLE = "Mubarak Family Restaurant Marthandam | Halal Multi-Cuisine";
+const TITLE = "Mubarak Hotel Marthandam | Rooms, Restaurant & Party Hall";
 const DESCRIPTION =
-  "Halal family restaurant in Marthandam, Kanyakumari. South Indian, Kerala, Chinese and Arabian dishes, biriyani, rooms and event spaces. Open daily 8 AM–11 PM.";
-const OG_IMAGE = {
-  url: "/assets/img/og-image.jpg",
-  width: 1200,
-  height: 630,
-  alt: "Biriyani at Mubarak Family Restaurant, Marthandam",
-};
+  "Mubarak Hotel, Marthandam: room booking, halal family restaurant, party hall and conference hall for meetings and events. Call +91 73737 50999. Open daily.";
 
 export const metadata = {
   // Absolute base for canonical, Open Graph and Twitter URLs.
   metadataBase: new URL(SITE_URL),
-  title: TITLE,
+  title: {
+    default: TITLE,
+    // Inner pages: "Menu & Prices | Mubarak Hotel Marthandam"
+    template: "%s | Mubarak Hotel Marthandam",
+  },
   description: DESCRIPTION,
-  applicationName: "Mubarak Family Restaurant",
+  applicationName: SITE_NAME,
   keywords: [
     "Mubarak Hotel",
-    "Mubarak Family Restaurant",
+    "Hotel Mubarak",
+    "Mubarak Hotel Marthandam",
+    "Hotel Mubarak Marthandam",
+    "Mubarak Hotel & Family Restaurant",
+    "hotel in Marthandam",
+    "hotel rooms Marthandam",
+    "room booking Marthandam",
+    "hotels in Kanyakumari district",
     "restaurant in Marthandam",
-    "halal restaurant Kanyakumari",
+    "family restaurant Kanyakumari",
+    "halal restaurant Marthandam",
     "biriyani Marthandam",
     "Kerala food Marthandam",
-    "South Indian restaurant",
     "Chinese restaurant Marthandam",
     "Arabian food Al Faham",
-    "family restaurant Kanyakumari",
     "party hall Marthandam",
-    "hotel rooms Marthandam",
+    "banquet hall Marthandam",
+    "birthday party hall",
+    "wedding reception hall Marthandam",
+    "conference hall Marthandam",
+    "meeting hall Marthandam",
+    "corporate events Kanyakumari",
+    "catering Marthandam",
   ],
   authors: [{ name: "Alameen Amaanullah" }],
   alternates: {
@@ -76,7 +86,7 @@ export const metadata = {
     type: "website",
     locale: "en_IN",
     url: "/",
-    siteName: "Mubarak Family Restaurant",
+    siteName: SITE_NAME,
     title: TITLE,
     description: DESCRIPTION,
     images: [OG_IMAGE],
@@ -89,24 +99,49 @@ export const metadata = {
   },
 };
 
-// Google structured data: lets search show address, hours, cuisine, phone.
-const RESTAURANT_JSON_LD = {
-  "@context": "https://schema.org",
-  "@type": "Restaurant",
-  "@id": `${SITE_URL}/#restaurant`,
-  name: "Mubarak Family Restaurant",
-  alternateName: "Mubarak Hotel & Family Restaurant",
-  url: SITE_URL,
-  image: [`${SITE_URL}/assets/img/og-image.jpg`],
-  logo: `${SITE_URL}/assets/img/mubarak_logo.png`,
-  description: DESCRIPTION,
+// Google structured data (schema.org). Shared contact details first, then
+// the hotel, the restaurant inside it, and the website itself.
+const ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: "2-76-A2, Safiya Complex, Main Road",
+  addressLocality: "Marthandam",
+  addressRegion: "Tamil Nadu",
+  postalCode: "629165",
+  addressCountry: "IN",
+};
+
+const GEO = { "@type": "GeoCoordinates", latitude: 8.2925, longitude: 77.2578 };
+
+const OPEN_DAILY = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "08:00",
+    closes: "23:00",
+  },
+];
+
+const CONTACT = {
   telephone: "+91-73737-50999",
+  email: "mubarakhotels@yahoo.co.in",
+  address: ADDRESS,
+  geo: GEO,
+  hasMap: "https://www.google.com/maps/search/?api=1&query=Mubarak+Hotel+Marthandam",
   contactPoint: [
     {
       "@type": "ContactPoint",
       telephone: "+91-73737-50999",
       contactType: "reservations",
       areaServed: "IN",
+      availableLanguage: ["English", "Tamil", "Malayalam"],
     },
     {
       "@type": "ContactPoint",
@@ -115,41 +150,89 @@ const RESTAURANT_JSON_LD = {
       areaServed: "IN",
     },
   ],
-  email: "mubarakhotels@yahoo.co.in",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "2-76-A2, Safiya Complex, Main Road",
-    addressLocality: "Marthandam",
-    addressRegion: "Tamil Nadu",
-    postalCode: "629165",
-    addressCountry: "IN",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: 8.2925,
-    longitude: 77.2578,
-  },
-  openingHoursSpecification: [
+};
+
+const amenity = (name) => ({
+  "@type": "LocationFeatureSpecification",
+  name,
+  value: true,
+});
+
+const HOTEL_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  "@id": `${SITE_URL}/#hotel`,
+  name: SITE_NAME,
+  alternateName: ["Hotel Mubarak", "Mubarak Hotel"],
+  description: DESCRIPTION,
+  url: `${SITE_URL}/`,
+  image: [`${SITE_URL}/assets/img/og-image.jpg`],
+  logo: `${SITE_URL}/assets/img/mubarak_logo.png`,
+  ...CONTACT,
+  openingHoursSpecification: OPEN_DAILY,
+  priceRange: "₹",
+  currenciesAccepted: "INR",
+  amenityFeature: [
+    amenity("Rooms"),
+    amenity("Restaurant"),
+    amenity("Party hall"),
+    amenity("Banquet hall"),
+    amenity("Conference hall"),
+    amenity("Meeting room"),
+    amenity("Catering"),
+  ],
+  containsPlace: [
+    { "@id": `${SITE_URL}/#restaurant` },
     {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
-      opens: "08:00",
-      closes: "23:00",
+      "@type": "EventVenue",
+      name: "Mubarak Hotel party & banquet hall",
+      description:
+        "Hall for birthdays, weddings, receptions and family parties, with halal catering.",
+      url: `${SITE_URL}/events/`,
+    },
+    {
+      "@type": "EventVenue",
+      name: "Mubarak Hotel conference & meeting hall",
+      description:
+        "Space for conferences, business meetings and corporate events in Marthandam.",
+      url: `${SITE_URL}/events/`,
     },
   ],
+  potentialAction: {
+    "@type": "ReserveAction",
+    target: `${SITE_URL}/book-a-table/`,
+    name: "Book a table",
+  },
+};
+
+const RESTAURANT_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "@id": `${SITE_URL}/#restaurant`,
+  name: "Mubarak Family Restaurant",
+  alternateName: ["Mubarak Hotel & Family Restaurant", "Hotel Mubarak restaurant"],
+  description:
+    "Halal multi-cuisine family restaurant: South Indian, Kerala, Chinese and Arabian dishes, biriyani and Al Faham.",
+  url: `${SITE_URL}/menu/`,
+  image: [`${SITE_URL}/assets/img/og-image.jpg`],
+  ...CONTACT,
+  containedInPlace: { "@id": `${SITE_URL}/#hotel` },
+  openingHoursSpecification: OPEN_DAILY,
   servesCuisine: ["South Indian", "Kerala", "Chinese", "Arabian", "Halal"],
   priceRange: "₹",
   currenciesAccepted: "INR",
-  hasMenu: `${SITE_URL}/#menu`,
+  hasMenu: `${SITE_URL}/menu/`,
   acceptsReservations: true,
+};
+
+const WEBSITE_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: "Mubarak Hotel",
+  alternateName: [SITE_NAME, "Hotel Mubarak", "Mubarak Family Restaurant"],
+  url: `${SITE_URL}/`,
+  publisher: { "@id": `${SITE_URL}/#hotel` },
 };
 
 export default function RootLayout({ children }) {
@@ -168,7 +251,11 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(RESTAURANT_JSON_LD),
+            __html: JSON.stringify([
+              WEBSITE_JSON_LD,
+              HOTEL_JSON_LD,
+              RESTAURANT_JSON_LD,
+            ]),
           }}
         />
       </head>

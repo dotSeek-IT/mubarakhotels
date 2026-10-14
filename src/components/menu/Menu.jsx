@@ -66,7 +66,10 @@ function PriceRow({ item, portions, icon }) {
   );
 }
 
-export default function Menu() {
+export default function Menu({ asPage = false }) {
+  // On its own page this section holds the page <h1>.
+  const Heading = asPage ? "h1" : "h2";
+
   const [activeGroup, setActiveGroup] = useState(menuGroups[0].id);
   const tabsRef = useRef(null);
 
@@ -115,19 +118,19 @@ export default function Menu() {
         {/* Left: fixed photo panel */}
         <aside className="menu-panel">
           <img
-            src="assets/img/menu/web/menu-panel.jpg"
+            src="/assets/img/menu/web/menu-panel.jpg"
             alt="Biriyani served at Mubarak Family Restaurant"
             className="menu-panel-image"
           />
           <div className="menu-panel-content">
             <span className="menu-panel-script">Check Out</span>
-            <h2>Our Menu</h2>
+            <Heading>Our Menu</Heading>
             <p>
               South Indian, Kerala, Chinese and Arabian favourites. All halal,
               cooked fresh in Marthandam.
             </p>
             <a
-              href="assets/menu/mubarak-menu.pdf"
+              href="/assets/menu/mubarak-menu.pdf"
               className="menu-panel-download"
               target="_blank"
               rel="noopener noreferrer"

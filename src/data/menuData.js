@@ -184,7 +184,7 @@ export const menuCategories = [
     icon: "bi-moon-stars",
     portions: true,
     items: [
-      { name: "Al Faham Chicken", half: 250, full: 500, image: "assets/img/menu/web/main-3-thumb.jpg" },
+      { name: "Al Faham Chicken", half: 250, full: 500, image: "/assets/img/menu/web/main-3-thumb.jpg" },
       { name: "Grilled Chicken", half: 250, full: 500 },
       { name: "Tandoori Chicken", half: 250, full: 500 },
       { name: "BBQ Chicken", half: 260, full: 520 },
@@ -245,7 +245,7 @@ export const menuCategories = [
     title: "Biriyani",
     icon: "bi-stars",
     items: [
-      { name: "Mutton Biriyani", price: 280, image: "assets/img/menu/web/main-2-thumb.jpg" },
+      { name: "Mutton Biriyani", price: 280, image: "/assets/img/menu/web/main-2-thumb.jpg" },
       { name: "Chicken Biriyani", price: 180 },
       { name: "Chicken 65 Biriyani", price: 210 },
       { name: "Chicken 65 Biriyani SP", price: 235 },
@@ -288,7 +288,7 @@ export const menuCategories = [
     title: "Noodles",
     icon: "bi-tsunami",
     items: [
-      { name: "Chicken Noodles", price: 180, image: "assets/img/menu/web/main-4-thumb.jpg" },
+      { name: "Chicken Noodles", price: 180, image: "/assets/img/menu/web/main-4-thumb.jpg" },
       { name: "Egg Noodles", price: 140 },
       { name: "Veg Noodles", price: 130 },
       { name: "Mutton Noodles", price: 230 },
@@ -369,7 +369,7 @@ export const menuSpecials = [
     name: "Al Faham Chicken",
     label: "Chef's Choice",
     price: "₹250 / ₹500",
-    image: "assets/img/menu/web/main-3-thumb.jpg",
+    image: "/assets/img/menu/web/main-3-thumb.jpg",
     description:
       "Arabian-style chicken marinated in aromatic spices and slow-grilled over charcoal.",
   },
@@ -378,7 +378,7 @@ export const menuSpecials = [
     name: "Mutton Biriyani",
     label: "Chef's Pick",
     price: "₹280",
-    image: "assets/img/menu/web/main-2-thumb.jpg",
+    image: "/assets/img/menu/web/main-2-thumb.jpg",
     description:
       "Fragrant rice layered with tender mutton and traditional spices, slow-cooked dum style.",
   },
@@ -387,7 +387,7 @@ export const menuSpecials = [
     name: "Chicken Noodles",
     label: "House Special",
     price: "₹180",
-    image: "assets/img/menu/web/main-4-thumb.jpg",
+    image: "/assets/img/menu/web/main-4-thumb.jpg",
     description:
       "Wok-tossed noodles with chicken, crunchy vegetables and Indo-Chinese sauces.",
   },

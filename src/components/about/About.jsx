@@ -1,12 +1,15 @@
 "use client";
 
-export default function About() {
+export default function About({ asPage = false }) {
+  // On its own page this section holds the page <h1>.
+  const Heading = asPage ? "h1" : "h2";
+
   return (
     <section id="about" className="about section">
       {/* Section Title */}
       <div className="container section-title" data-aos="fade-up">
         <span className="description-title">Our story</span>
-        <h2>Welcome to Mubarak</h2>
+        <Heading>Welcome to Mubarak Hotel</Heading>
         <p>
           Discover comfort, fine dining, and hospitality at the heart of
           Marthandam, Kanyakumari
@@ -68,14 +71,14 @@ export default function About() {
               <div className="row g-3">
                 <div className="col-6">
                   <img
-                    src="assets/img/showcase-1.jpg"
+                    src="/assets/img/showcase-1.jpg"
                     className="img-fluid rounded"
                     alt="Hotel Mubarak Dining"
                   />
                 </div>
                 <div className="col-6">
                   <img
-                    src="assets/img/showcase-3.jpg"
+                    src="/assets/img/showcase-3.jpg"
                     className="img-fluid rounded"
                     alt="Hotel Mubarak Restaurant"
                   />
@@ -86,7 +89,7 @@ export default function About() {
                     <span className="text">Years of Excellence</span>
                   </div>
                   <img
-                    src="assets/img/showcase-4.jpg"
+                    src="/assets/img/showcase-4.jpg"
                     className="img-fluid rounded"
                     alt="Hotel Mubarak Rooms"
                   />

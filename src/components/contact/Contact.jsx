@@ -10,12 +10,15 @@ const onSend = emailFormHandler("Website enquiry", {
   message: "Message",
 });
 
-export default function Contact() {
+export default function Contact({ asPage = false }) {
+  // On its own page this section holds the page <h1>.
+  const Heading = asPage ? "h1" : "h2";
+
   return (
     <section id="contact" className="contact section light-background">
       <div className="container section-title" data-aos="fade-up">
         <span className="description-title">Get in touch</span>
-        <h2>Contact us</h2>
+        <Heading>Contact us</Heading>
         <p>
           Questions about reservations, events or catering? Send us a message
           and our team will get back to you.
