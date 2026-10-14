@@ -177,7 +177,8 @@ export default function BookATable() {
                         we&apos;ll be ready for you.
                       </BookingTip>
                       <BookingTip icon="bi-telephone" title="Prefer to call?">
-                        <a href="tel:+914651270999">+91 4651 270 999</a>, every
+                        <a href="tel:+917373750999">+91 73737 50999</a> or{" "}
+                        <a href="tel:+914651272545">04651 272545</a>, every
                         day from 8:00 AM to 11:00 PM.
                       </BookingTip>
                     </ul>

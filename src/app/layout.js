@@ -100,7 +100,21 @@ const RESTAURANT_JSON_LD = {
   image: [`${SITE_URL}/assets/img/og-image.jpg`],
   logo: `${SITE_URL}/assets/img/mubarak_logo.png`,
   description: DESCRIPTION,
-  telephone: "+91-4651-270-999",
+  telephone: "+91-73737-50999",
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-73737-50999",
+      contactType: "reservations",
+      areaServed: "IN",
+    },
+    {
+      "@type": "ContactPoint",
+      telephone: "+91-4651-272545",
+      contactType: "customer service",
+      areaServed: "IN",
+    },
+  ],
   email: "mubarakhotels@yahoo.co.in",
   address: {
     "@type": "PostalAddress",

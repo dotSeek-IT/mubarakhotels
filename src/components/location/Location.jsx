@@ -37,7 +37,9 @@ export default function Location() {
                   Marthandam, KK District, Tamil Nadu 629165
                 </LocationItem>
                 <LocationItem icon="bi-telephone" title="Reservations">
-                  <a href="tel:+914651270999">+91 4651 270 999</a>
+                  <a href="tel:+917373750999">+91 73737 50999</a>
+                  <br />
+                  <a href="tel:+914651272545">04651 272545</a>
                   <small>Book 48 hours ahead for parties and weekends.</small>
                 </LocationItem>
                 <LocationItem icon="bi-clock" title="Opening hours">
@@ -54,7 +56,7 @@ export default function Location() {
                 >
                   <i className="bi bi-signpost-2"></i> Get directions
                 </a>
-                <a href="tel:+914651270999" className="btn-mb btn-mb-outline">
+                <a href="tel:+917373750999" className="btn-mb btn-mb-outline">
                   <i className="bi bi-telephone"></i> Call us
                 </a>
               </div>

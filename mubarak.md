@@ -166,9 +166,15 @@ Never stack shadows.
 - **Forms:** the site has no server, so never point a form at a `.php` file or leave it without a handler. Use `emailFormHandler(subject, fields)` from `src/components/utils/emailForm.js`. It opens the visitor's email app addressed to `RESTAURANT_EMAIL`, then shows the form's `.sent-message`. Give every input an `aria-label` or a visually hidden `<label>`.
 - **Map:** the Google map appears once, in `#location`. Use `DIRECTIONS_URL` (exported from `Location.jsx`) for any "Get directions" link.
 
+## Phone numbers
+
+- **Mobile (main):** +91 73737 50999, `tel:+917373750999`. Use it for every single "Call" button or link (header, floating bar, phone menu, hero, Events, Location's "Call us").
+- **Landline:** 04651 272545, `tel:+914651272545`. Show it under the mobile wherever contact details are listed (Location, Contact, footer, booking tips).
+- Update the Google structured data in `layout.js` (`telephone`, `contactPoint`) when either changes.
+
 ## Navigation and active states
 
-- **Desktop header (1200px and up):** links are white at 60%, white on hover. The active link (set by scroll-spy) is gold with a 2px gold underline. The phone number ("Call to reserve, +91 4651 270 999") sits at the far right as a tap-to-call link.
+- **Desktop header (1200px and up):** links are white at 60%, white on hover. The active link (set by scroll-spy) is gold with a 2px gold underline. The phone number ("Call to reserve, +91 73737 50999") sits at the far right as a tap-to-call link.
 - **Phone and tablet menu (below 1200px):** the ☰ button opens a full-screen charcoal panel with large links. The active link is gold on a tinted row with a gold bar on the left. A "Call us" button sits at the bottom. The header also shows a round gold call button beside ☰. The button works with Enter, Space and Escape.
 - **Menu section tabs:** text tabs, with the active one gold and a 2px gold underline (Nique style), following scroll position.
 - **Mobile menu rows (576px and below):** 56px thumbnail, dish name in Chillax, no dotted leaders or dividers, and Half / Full prices stacked on the right with small labels.

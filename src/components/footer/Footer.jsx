@@ -51,8 +51,12 @@ export default function Footer() {
             <h4>Contact</h4>
             <ul className="footer-contact">
               <li>
+                <i className="bi bi-phone"></i>
+                <a href="tel:+917373750999">+91 73737 50999</a>
+              </li>
+              <li>
                 <i className="bi bi-telephone"></i>
-                <a href="tel:+914651270999">+91 4651 270 999</a>
+                <a href="tel:+914651272545">04651 272545</a>
               </li>
               <li>
                 <i className="bi bi-envelope"></i>

@@ -38,7 +38,7 @@ export default function FloatingBar() {
       aria-hidden={!visible}
     >
       <a
-        href="tel:+914651270999"
+        href="tel:+917373750999"
         className="floating-bar-icon"
         aria-label="Call the restaurant"
         tabIndex={visible ? 0 : -1}

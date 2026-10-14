@@ -32,14 +32,14 @@ export default function Header() {
 
           {/* Phone: number on desktop, icon button beside the menu toggle on phones */}
           <a
-            href="tel:+914651270999"
+            href="tel:+917373750999"
             className="header-phone"
-            aria-label="Call +91 4651 270 999"
+            aria-label="Call +91 73737 50999"
           >
             <i className="bi bi-telephone"></i>
             <span className="header-phone-text">
               <small>Call to reserve</small>
-              +91 4651 270 999
+              +91 73737 50999
             </span>
           </a>
 
@@ -67,7 +67,7 @@ export default function Header() {
               </li>
               {/* Phone menu only: actions at the bottom of the panel */}
               <li className="nav-actions d-xl-none">
-                <a href="tel:+914651270999" className="btn-mb btn-mb-outline">
+                <a href="tel:+917373750999" className="btn-mb btn-mb-outline">
                   <i className="bi bi-telephone"></i> Call us
                 </a>
               </li>

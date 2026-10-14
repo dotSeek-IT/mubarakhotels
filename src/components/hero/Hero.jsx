@@ -71,7 +71,7 @@ export default function Hero() {
                   <i className="bi bi-telephone"></i>
                   <span>
                     <small>Reservations</small>
-                    <a href="tel:+914651270999">+91 4651 270 999</a>
+                    <a href="tel:+917373750999">+91 73737 50999</a>
                   </span>
                 </li>
               </ul>

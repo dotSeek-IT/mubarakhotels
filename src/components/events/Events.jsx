@@ -35,7 +35,7 @@ export default function Events() {
                 <a href="#book-a-table" className="btn-mb">
                   <i className="bi bi-calendar-event"></i> Book now
                 </a>
-                <a href="tel:+914651270999" className="btn-mb btn-mb-outline">
+                <a href="tel:+917373750999" className="btn-mb btn-mb-outline">
                   <i className="bi bi-telephone"></i> Call to plan
                 </a>
               </div>

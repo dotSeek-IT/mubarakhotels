@@ -29,7 +29,9 @@ export default function Contact() {
               <h3>Talk to us</h3>
               <ul>
                 <ContactLine icon="bi-telephone" label="Call">
-                  <a href="tel:+914651270999">+91 4651 270 999</a>
+                  <a href="tel:+917373750999">+91 73737 50999</a>
+                  <br />
+                  <a href="tel:+914651272545">04651 272545</a>
                 </ContactLine>
                 <ContactLine icon="bi-envelope" label="Email">
                   <a href="mailto:mubarakhotels@yahoo.co.in">
