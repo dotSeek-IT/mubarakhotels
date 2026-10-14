@@ -185,6 +185,12 @@ Never stack shadows.
 - **"Book a table" appears in:** the nav link, the hero button, the floating bar and the footer link list. Events uses "Book now" for event bookings. Don't add more booking buttons. Location's actions are "Get directions" and "Call us".
 - **Contact details** (address, hours, phone, email) live in Location, Contact and the footer. Don't repeat them as cards in other sections.
 
+## Branches and map
+
+- **Branches** live in `src/data/branches.js`: **Hotel Mubarak** (hotel, rooms & restaurant, Safiya Complex, Main Road/SH 90, +91 73737 50999) and **Mubarak Family Restaurant** (Trivandrum–Nagercoil Highway, 04651 272545). Coordinates and Google place IDs come from their Google Maps listings. Location, Contact, footer and the Google data all read from this file.
+- **Map:** `src/components/location/BranchMap.jsx` uses Leaflet with OpenStreetMap tiles (no API key), darkened with a CSS filter, plus gold numbered pins. Clicking a branch card flies to its pin; "Show both" zooms back out. Keep the OpenStreetMap attribution visible (required by their licence).
+- **Directions buttons** open Google Maps with the branch's place ID, so they land on the right listing.
+
 ## Pages and SEO
 
 - **Pages:** `/` (all sections), plus `/menu/`, `/about/`, `/book-a-table/`, `/events/` and `/contact/` (folders in `src/app/`). Inner pages wrap sections in `<main className="main inner-page">` and pass `asPage`, so the section heading becomes the page's only `<h1>`.

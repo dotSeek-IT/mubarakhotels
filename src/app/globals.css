@@ -746,6 +746,11 @@ h6 {
   color: var(--mb-gold);
 }
 
+.footer .footer-contact strong {
+  font-weight: 500;
+  color: var(--mb-white);
+}
+
 .footer .footer-hours {
   display: flex;
   flex-direction: column;
@@ -2708,50 +2713,320 @@ body:has(.inner-page) .header {
 }
 
 /*--------------------------------------------------------------
-# Location Section
+# Location Section (branches + map)
 --------------------------------------------------------------*/
-.location .location-map {
+.location .branch-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.location .branch-card {
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background-color: var(--mb-ink);
+  border: 1px solid color-mix(in srgb, var(--mb-white), transparent 90%);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.location .branch-card.is-active {
+  border-color: var(--mb-gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--mb-gold), transparent 85%);
+}
+
+.location .branch-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+}
+
+.location .branch-number {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background-color: var(--mb-gold);
+  color: var(--mb-ink-deep);
+  font-family: var(--nav-font);
+  font-weight: 600;
+}
+
+.location .branch-title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.location .branch-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mb-gold);
+}
+
+.location .branch-name {
+  font-family: var(--heading-font);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--mb-white);
+}
+
+.location .branch-locate {
+  font-size: 20px;
+  color: color-mix(in srgb, var(--mb-white), transparent 55%);
+  transition: color 0.2s;
+}
+
+.location .branch-card-head:hover .branch-locate,
+.location .branch-card.is-active .branch-locate {
+  color: var(--mb-gold);
+}
+
+.location .branch-details {
+  list-style: none;
+  margin: 16px 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+  color: color-mix(in srgb, var(--mb-white), transparent 20%);
+}
+
+.location .branch-details li {
+  display: flex;
+  gap: 10px;
+}
+
+.location .branch-details i {
+  color: var(--mb-gold);
+}
+
+.location .branch-details a {
+  color: var(--mb-white);
+  font-weight: 500;
+}
+
+.location .branch-details a:hover {
+  color: var(--mb-gold);
+}
+
+.location .branch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.location .branch-actions .btn-mb {
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+/* Map */
+.location .branch-map-wrap {
+  position: relative;
   height: 100%;
-  min-height: 420px;
+  min-height: 480px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--mb-white), transparent 90%);
 }
 
-.location .location-map iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 420px;
+.location .branch-map {
+  position: absolute;
+  inset: 0;
+  background-color: var(--mb-ink);
+}
+
+/* Dark map: OpenStreetMap tiles inverted and warmed to match charcoal/gold */
+.location .branch-map-tiles {
+  filter: invert(1) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.6) sepia(0.15);
+}
+
+.location .branch-map-reset {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--mb-ink-deep);
+  color: var(--mb-gold);
+  font-family: var(--nav-font);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 35%);
+}
+
+/* Gold pins */
+.branch-pin {
+  background: none;
   border: 0;
 }
 
-.location .location-card {
-  height: 100%;
+.branch-pin .branch-pin-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 32px;
-  padding: 32px;
-  border-radius: var(--radius-lg);
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background-color: var(--mb-gold);
+  border: 3px solid var(--mb-ink-deep);
+  box-shadow: 0 6px 16px rgb(0 0 0 / 45%);
+  transition: transform 0.25s;
+}
+
+.branch-pin .branch-pin-dot i {
+  transform: rotate(45deg);
+  color: var(--mb-ink-deep);
+  font-size: 18px;
+}
+
+.branch-pin .branch-pin-label {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--mb-ink-deep);
+  color: var(--mb-gold);
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid var(--mb-gold);
+}
+
+/* Pulsing ring under the selected pin */
+.branch-pin.is-active .branch-pin-dot {
+  transform: rotate(-45deg) scale(1.12);
+}
+
+.branch-pin.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  border-radius: 50%;
+  border: 2px solid var(--mb-gold);
+  animation: branch-pulse 1.6s ease-out infinite;
+}
+
+@keyframes branch-pulse {
+  from {
+    transform: scale(0.4);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .branch-pin.is-active::after {
+    animation: none;
+  }
+}
+
+/* Leaflet popups and controls in brand colours */
+.location .leaflet-popup-content-wrapper,
+.location .leaflet-popup-tip {
+  background-color: var(--mb-ink-deep);
+  color: var(--mb-white);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 45%);
+}
+
+.location .leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--mb-gold), transparent 60%);
+}
+
+.location .leaflet-popup-content {
+  margin: 12px 16px;
+  font-family: var(--default-font);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.location .leaflet-popup-content strong {
+  font-family: var(--heading-font);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--mb-gold);
+}
+
+.location .leaflet-popup-content a {
+  color: var(--mb-gold);
+  font-weight: 600;
+}
+
+.location .leaflet-container a.leaflet-popup-close-button {
+  color: var(--mb-white);
+}
+
+.location .leaflet-bar a {
+  background-color: var(--mb-ink-deep);
+  color: var(--mb-gold);
+  border-color: color-mix(in srgb, var(--mb-white), transparent 85%);
+}
+
+.location .leaflet-bar a:hover {
   background-color: var(--mb-ink);
-  border: 1px solid color-mix(in srgb, var(--mb-gold), transparent 75%);
 }
 
-.location .location-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 24px;
+.location .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--mb-ink-deep), transparent 20%);
+  color: color-mix(in srgb, var(--mb-white), transparent 40%);
 }
 
-.location .location-list li {
-  display: flex;
-  gap: 16px;
+.location .leaflet-control-attribution a {
+  color: var(--mb-gold);
 }
 
-.location .location-icon,
+@media (max-width: 991px) {
+  .location .branch-map-wrap {
+    min-height: 380px;
+  }
+}
+
+@media (max-width: 576px) {
+  .location .branch-card {
+    padding: 16px;
+  }
+
+  .location .branch-map-wrap {
+    min-height: 320px;
+  }
+}
+
 .contact .contact-icon {
   flex: 0 0 auto;
   display: inline-flex;
@@ -2764,45 +3039,6 @@ body:has(.inner-page) .header {
   border: 1px solid color-mix(in srgb, var(--mb-gold), transparent 70%);
   color: var(--mb-gold);
   font-size: 18px;
-}
-
-.location .location-list h3 {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--mb-gold);
-  margin: 0 0 4px;
-}
-
-.location .location-list p {
-  margin: 0;
-  color: color-mix(in srgb, var(--mb-white), transparent 15%);
-}
-
-.location .location-list a {
-  color: var(--mb-white);
-  font-weight: 500;
-}
-
-.location .location-list a:hover {
-  color: var(--mb-gold);
-}
-
-.location .location-list small {
-  display: block;
-  margin-top: 4px;
-  font-size: 13px;
-  color: color-mix(in srgb, var(--mb-white), transparent 45%);
-}
-
-@media (max-width: 576px) {
-  .location .location-card {
-    padding: 24px;
-  }
-
-  .location .location-map,
-  .location .location-map iframe {
-    min-height: 320px;
-  }
 }
 
 /*--------------------------------------------------------------
@@ -3348,6 +3584,27 @@ body:has(.inner-page) .header {
 }
 
 .contact .contact-aside a:hover {
+  color: var(--mb-gold);
+}
+
+.contact .contact-branch {
+  display: block;
+}
+
+.contact .contact-branch + .contact-branch {
+  margin-top: 10px;
+}
+
+.contact .contact-branch strong {
+  display: block;
+  font-weight: 500;
+  color: var(--mb-white);
+}
+
+.contact .contact-branch a {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 13px;
   color: var(--mb-gold);
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { DIRECTIONS_URL } from "@/components/location/Location";
+import { BRANCHES } from "@/data/branches";
 import { emailFormHandler } from "@/components/utils/emailForm";
 
 const onSend = emailFormHandler("Website enquiry", {
@@ -42,15 +42,19 @@ export default function Contact({ asPage = false }) {
                   </a>
                 </ContactLine>
                 <ContactLine icon="bi-geo-alt" label="Visit">
-                  Main Road, Marthandam
-                  <br />
-                  <a
-                    href={DIRECTIONS_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Get directions <i className="bi bi-arrow-up-right"></i>
-                  </a>
+                  {BRANCHES.map((b) => (
+                    <span key={b.id} className="contact-branch">
+                      <strong>{b.name}</strong>
+                      {b.streetAddress}, Marthandam
+                      <a
+                        href={b.directionsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Directions <i className="bi bi-arrow-up-right"></i>
+                      </a>
+                    </span>
+                  ))}
                 </ContactLine>
                 <ContactLine icon="bi-clock" label="Hours">
                   Every day, 8:00 AM – 11:00 PM

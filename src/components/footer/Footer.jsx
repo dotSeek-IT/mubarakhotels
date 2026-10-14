@@ -1,6 +1,7 @@
 "use client";
 
 import { DIRECTIONS_URL } from "@/components/location/Location";
+import { BRANCHES } from "@/data/branches";
 
 const QUICK_LINKS = [
   // Real page URLs (not #anchors) so Google can find and list each page.
@@ -71,13 +72,16 @@ export default function Footer() {
                   mubarakhotels@yahoo.co.in
                 </a>
               </li>
-              <li>
-                <i className="bi bi-geo-alt"></i>
-                <span>
-                  2-76-A2, Safiya Complex, Main Road, Marthandam, Tamil Nadu
-                  629165
-                </span>
-              </li>
+              {BRANCHES.map((b) => (
+                <li key={b.id}>
+                  <i className="bi bi-geo-alt"></i>
+                  <span>
+                    <strong>{b.name}</strong>
+                    <br />
+                    {b.address}
+                  </span>
+                </li>
+              ))}
             </ul>
           </div>
 

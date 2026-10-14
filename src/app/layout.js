@@ -6,6 +6,7 @@ import "swiper/css";
 import "glightbox/dist/css/glightbox.min.css";
 import "./globals.css";
 import { OG_IMAGE, SITE_NAME, SITE_URL } from "@/app/seo";
+import { BRANCHES } from "@/data/branches";
 
 import TemplateScripts from "@/components/utils/TemplateScripts";
 import Header from "@/components/header/Header";
@@ -137,7 +138,7 @@ const CONTACT = {
   email: "mubarakhotels@yahoo.co.in",
   address: ADDRESS,
   geo: GEO,
-  hasMap: "https://www.google.com/maps/search/?api=1&query=Mubarak+Hotel+Marthandam",
+  hasMap: BRANCHES[0].mapsUrl,
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -187,7 +188,6 @@ const HOTEL_JSON_LD = {
     amenity("Catering"),
   ],
   containsPlace: [
-    { "@id": `${SITE_URL}/#restaurant` },
     {
       "@type": "EventVenue",
       name: "Mubarak Hotel party & banquet hall",
@@ -203,6 +203,7 @@ const HOTEL_JSON_LD = {
       url: `${SITE_URL}/events/`,
     },
   ],
+  subOrganization: { "@id": `${SITE_URL}/#restaurant` },
   potentialAction: {
     "@type": "ReserveAction",
     target: `${SITE_URL}/book-a-table/`,
@@ -220,8 +221,20 @@ const RESTAURANT_JSON_LD = {
     "Halal multi-cuisine family restaurant: South Indian, Kerala, Chinese and Arabian dishes, biriyani and Al Faham.",
   url: `${SITE_URL}/menu/`,
   image: [`${SITE_URL}/assets/img/og-image.jpg`],
+  // Separate branch on the highway, about 200 m from the hotel.
   ...CONTACT,
-  containedInPlace: { "@id": `${SITE_URL}/#hotel` },
+  telephone: BRANCHES[1].phone.schema,
+  address: {
+    ...ADDRESS,
+    streetAddress: BRANCHES[1].streetAddress,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: BRANCHES[1].lat,
+    longitude: BRANCHES[1].lng,
+  },
+  hasMap: BRANCHES[1].mapsUrl,
+  parentOrganization: { "@id": `${SITE_URL}/#hotel` },
   openingHoursSpecification: OPEN_DAILY,
   servesCuisine: ["South Indian", "Kerala", "Chinese", "Arabian", "Halal"],
   priceRange: "₹",
