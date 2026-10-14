@@ -1,9 +1,10 @@
 "use client";
 
+// Centred on the "Hotel Mubarak" Google Maps listing (8.3065462, 77.2239003).
 const MAP_EMBED =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.514567760466!2d77.25782087548238!3d8.292500593900032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b03ec0a3d019eaf%3A0x3e1b8db15f3d30b8!2sMubarak%20Hotel!5e0!3m2!1sen!2sin!4v1692945600000!5m2!1sen!2sin";
+  "https://maps.google.com/maps?q=Hotel+Mubarak,+Marthandam&ll=8.3065462,77.2239003&z=17&output=embed";
 export const DIRECTIONS_URL =
-  "https://www.google.com/maps/search/?api=1&query=Mubarak+Hotel+Marthandam";
+  "https://www.google.com/maps/dir/?api=1&destination=Hotel+Mubarak+Marthandam";
 
 export default function Location() {
   return (

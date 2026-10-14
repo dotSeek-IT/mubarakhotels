@@ -112,7 +112,8 @@ const ADDRESS = {
   addressCountry: "IN",
 };
 
-const GEO = { "@type": "GeoCoordinates", latitude: 8.2925, longitude: 77.2578 };
+// Pin of the "Hotel Mubarak" Google Maps listing (plus code 864F+JH).
+const GEO = { "@type": "GeoCoordinates", latitude: 8.3065462, longitude: 77.2239003 };
 
 const OPEN_DAILY = [
   {
