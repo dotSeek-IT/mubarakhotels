@@ -85,6 +85,11 @@ a:hover {
   text-decoration: none;
 }
 
+/* Keep phone numbers on one line (e.g. "04651 272545") */
+a[href^="tel:"] {
+  white-space: nowrap;
+}
+
 h1,
 h2,
 h3,
