@@ -48,7 +48,7 @@ export const metadata = {
     "hotel in Marthandam",
     "hotel rooms Marthandam",
     "AC rooms Marthandam",
-    "hotel with parking Marthandam",
+    "hotel with free parking Marthandam",
     "room booking Marthandam",
     "hotels in Kanyakumari district",
     "restaurant in Marthandam",
@@ -177,7 +177,7 @@ const HOTEL_JSON_LD = {
   amenityFeature: [
     amenity("Rooms"),
     amenity("Air-conditioned rooms"),
-    amenity("Parking"),
+    amenity("Free parking"),
     amenity("Restaurant"),
     amenity("Party hall"),
     amenity("Banquet hall"),

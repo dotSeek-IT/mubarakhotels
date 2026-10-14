@@ -36,7 +36,7 @@ export default function Hero() {
                   <i className="bi bi-snow"></i> AC rooms
                 </li>
                 <li>
-                  <i className="bi bi-p-square"></i> Parking
+                  <i className="bi bi-p-square"></i> Free parking
                 </li>
                 <li>
                   <i className="bi bi-building"></i> Party &amp; conference hall
