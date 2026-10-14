@@ -33,7 +33,13 @@ export default function Hero() {
                   <i className="bi bi-people"></i> Family dining
                 </li>
                 <li>
-                  <i className="bi bi-building"></i> Rooms &amp; events
+                  <i className="bi bi-snow"></i> AC rooms
+                </li>
+                <li>
+                  <i className="bi bi-p-square"></i> Parking
+                </li>
+                <li>
+                  <i className="bi bi-building"></i> Party &amp; conference hall
                 </li>
               </ul>
 

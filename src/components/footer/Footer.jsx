@@ -34,6 +34,12 @@ export default function Footer() {
               <span>
                 <i className="bi bi-people"></i> Family dining
               </span>
+              <span>
+                <i className="bi bi-snow"></i> AC rooms
+              </span>
+              <span>
+                <i className="bi bi-p-square"></i> Parking
+              </span>
             </div>
           </div>
 
